@@ -46,34 +46,35 @@ body {
     border-left: .4rem solid #009857;
 }
 .heading::before {
-    top: 5.8rem;
+    top: 6rem;
     left: -2rem;
 }
 .heading::after {
-    bottom: -5rem;
+    bottom: 0rem;
     right: -2rem;
     transform: rotate(180deg);
 }
 
-.media {
+.row {
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding: 0 4rem;
 }
 
-.media .left {
+.row .content{
     text-align: left;
+    flex: 1;
 }
-.media .image {
+.row .image {
     width: 50vw;
 }
 
-.media .left h3 {
+.row .content h3 {
     font-size: 3rem;
-    color: aqua;
+    color: #313131;
 }
-.media .left p {
+.row .content p {
     font-size: 1rem;
     color: #333;
     padding: 1rem 0;
@@ -81,7 +82,7 @@ body {
 
 .btn {
     border-radius: .5rem;
-    background: #313131;
+    background: #009857;
     color: #f4f4f6;
     cursor: pointer;
     height: 3.5rem;
@@ -89,5 +90,5 @@ body {
     box-shadow: 0 0 0.2rem 0.3rem rgba(0,0,0,0.3);
 }
 .btn:hover {
-    background: #009857;
+    background: #f52e2e;
 }
