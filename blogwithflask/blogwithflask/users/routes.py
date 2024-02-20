@@ -31,4 +31,8 @@ def home():
 def about():
     return render_template('about.html', title='About Page')
 
+@users.route('/register')
+def register():
+    return render_template('register.html', title='Register Page')
+
 
