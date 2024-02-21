@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, url_for
+from blogwithflask.users.forms import RegisterForm
 
 users = Blueprint('users', __name__)
 
@@ -33,6 +34,7 @@ def about():
 
 @users.route('/register')
 def register():
-    return render_template('register.html', title='Register Page')
+    form = RegisterForm()
+    return render_template('register.html', title='Register Page', form=form)
 
 
