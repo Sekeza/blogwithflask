@@ -32,7 +32,7 @@ def home():
 def about():
     return render_template('about.html', title='About Page')
 
-@users.route('/register')
+@users.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
     return render_template('register.html', title='Register Page', form=form)
