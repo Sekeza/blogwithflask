@@ -18,6 +18,7 @@ html {
 body {
     line-height: 1.7;
     overflow-x: hidden;
+    font-size: 1.4rem;
 }
 
 .about {
@@ -91,4 +92,27 @@ body {
 }
 .btn:hover {
     background: #f52e2e;
+}
+
+
+.form_wrapper {
+    width: 32rem;
+    max-width: 100%;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 2px;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+}
+.button-register {
+    margin: 2rem 0;
 }
