@@ -45,6 +45,14 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect(url_for('users.home'))
+        if form.email.data == 'zee@zee.com' and form.password.data == 'zeezee':
+            flash(f'Welcome {form.email.data}! You can log in.', 'success')
+            return redirect(url_for('users.home'))
+        elif form.email.data == 'zane@zane.com' and form.password.data == 'zanezane':
+            flash(f'Welcome {form.email.data}! You can log in.', 'success')
+            return redirect(url_for('users.home'))
+        else:
+            flash('Please log in with the correct details.', 'danger')
+            return redirect(url_for('users.login'))
     return render_template('login.html', title='Login Page', form=form)
 
