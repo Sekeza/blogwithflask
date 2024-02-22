@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 import email_validator
-from blogwithflask.users.forms import RegisterForm
+from blogwithflask.users.forms import RegisterForm, LoginForm
 
 users = Blueprint('users', __name__)
 
@@ -43,8 +43,8 @@ def register():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-    form = RegisterForm()
+    form = LoginForm()
     if form.validate_on_submit():
         return redirect(url_for('users.home'))
-    return render_template('register.html', title='Login Page', form=form)
+    return render_template('login.html', title='Login Page', form=form)
 
