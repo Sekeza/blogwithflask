@@ -38,7 +38,13 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         flash('Welcome user! You can log in.', 'success')
-        return redirect(url_for('users.home'))
+        return redirect(url_for('users.login'))
     return render_template('register.html', title='Register Page', form=form)
 
+@users.route('/login', methods=['GET', 'POST'])
+def login():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        return redirect(url_for('users.home'))
+    return render_template('register.html', title='Login Page', form=form)
 
