@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <section class="register">
+        
+        <div class="form_wrapper">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <legend class="border-bottom nb-2">Log In!</legend>
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        {{ form.email.label(class='form-control-label mt-3') }}
+                        {{ form.email(class='form-control form-control-md') }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class='form-control-label mt-3') }}
+                        {{ form.password(class='form-control form-control-md') }}
+                    </div>
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                </fieldset>
+                <div class="form-group mt-3 button-register">
+                    {{ form.submit(class='btn btn-outline-secondary btn-sm') }}
+                </div>
+            </form>
+            <div class="pt-1">
+                <small class="text-muted">
+                    Need An Account? <a class="ml-2" href="#">Sign In</a>
+                </small>
+            </div>
+        </div>
+
+    </section>
+   
+{% endblock content%}
