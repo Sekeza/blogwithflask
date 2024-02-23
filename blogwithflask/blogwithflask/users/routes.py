@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 import email_validator
+from blogwithflask import bcrypt, db
 from blogwithflask.users.forms import RegisterForm, LoginForm
+from blogwithflask.users.models import User
 
 users = Blueprint('users', __name__)
 
@@ -37,7 +39,11 @@ def about():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        flash('Welcome user! You can log in.', 'success')
+        hash_passwd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hash_passwd)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Account created for {form.username.data}! You can now log in.', 'success')
         return redirect(url_for('users.login'))
     return render_template('register.html', title='Register Page', form=form)
 
