@@ -57,6 +57,9 @@ def login():
         elif form.email.data == 'zane@zane.com' and form.password.data == 'zanezane':
             flash(f'Welcome {form.email.data}! You can log in.', 'success')
             return redirect(url_for('users.home'))
+        elif form.email.data == 'ope@ope.com' and form.password.data == 'opeope':
+            flash(f'Welcome {form.email.data}! You can log in.', 'success')
+            return redirect(url_for('users.home'))
         else:
             flash('Please log in with the correct details.', 'danger')
             return redirect(url_for('users.login'))
