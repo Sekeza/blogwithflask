@@ -1,7 +1,9 @@
-from flask import Blueprint, render_template, url_for, redirect, flash
+import os, secrets
+from PIL import Image
+from flask import Blueprint, render_template, url_for, redirect, flash, request
 import email_validator
-from blogwithflask import bcrypt, db
-from blogwithflask.users.forms import RegisterForm, LoginForm
+from blogwithflask import bcrypt, db, app
+from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm
 from blogwithflask.users.models import User
 from flask_login import login_user, current_user, logout_user
 
@@ -74,8 +76,37 @@ def logout():
     logout_user()
     return redirect(url_for('users.login'))
 
+
+def save_picture(form_picture):
+    hex_random_num = secrets.token_hex(8)
+    _, file_ext = os.path.splitext(form_picture.filename)
+    picture_filename = hex_random_num + file_ext
+    picture_path = os.path.join(app.root_path, 'static/images', picture_filename )
+    # form_picture.save(picture_path)
+
+    pic_output_size = (65, 65)
+    i = Image.open(form_picture)
+    i.thumbnail(pic_output_size)
+    i.save(picture_path)
+
+    return picture_filename
+
 @users.route('/account')
 def account():
-    
-    return render_template('account.html', title='Account Page')
+    form = updateAccountForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file 
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('users.account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+
+    image_file = url_for('static', filename='images/' + current_user.image_file)
+    return render_template('account.html', title='Account Page', form=form, image_file=image_file)
 
