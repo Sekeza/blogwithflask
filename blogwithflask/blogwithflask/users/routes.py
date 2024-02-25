@@ -3,7 +3,7 @@ import email_validator
 from blogwithflask import bcrypt, db
 from blogwithflask.users.forms import RegisterForm, LoginForm
 from blogwithflask.users.models import User
-from flask_login import current_user
+from flask_login import login_user, current_user
 
 users = Blueprint('users', __name__)
 
@@ -61,6 +61,7 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             flash(f'Welcome {form.email.data}! You can log in.', 'success')
+            login_user(user, remember=form.remember.data)
             return redirect(url_for('users.home'))
             
         else:
