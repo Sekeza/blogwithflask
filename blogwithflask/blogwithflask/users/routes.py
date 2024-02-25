@@ -3,6 +3,7 @@ import email_validator
 from blogwithflask import bcrypt, db
 from blogwithflask.users.forms import RegisterForm, LoginForm
 from blogwithflask.users.models import User
+from flask_login import current_user
 
 users = Blueprint('users', __name__)
 
@@ -37,6 +38,9 @@ def about():
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('users.home'))
+
     form = RegisterForm()
     if form.validate_on_submit():
         hash_passwd = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -49,6 +53,9 @@ def register():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('users.home'))
+    
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
