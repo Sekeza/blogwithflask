@@ -3,8 +3,9 @@
 {% block content %}
 
 {% for post in posts %}
-    <div class="media">
-        <div>
+<article class="media content-section d-flex">
+    <div class="media-body d-flex">
+        <div class="media-body">
             <a> {{ post.author }} </a>
             <span> {{ post.date_posted }} </span>
         </div>
@@ -13,6 +14,7 @@
             <p> {{ post.content }} </p>
         </div>
     </div>
+</article>
 {% endfor %}
 
 {% endblock content%}
