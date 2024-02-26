@@ -6,23 +6,51 @@
         <div class="form_wrapper">
             <form action="" method="post">
                 {{ form.hidden_tag() }}
-                <legend class="border-bottom nb-2">Join Us!</legend>
+                <legend class="border-bottom mb-2">Join Us!</legend>
                 <fieldset class="form-group">
                     <div class="form-group">
                         {{ form.username.label(class='form-control-label mt-3') }}
-                        {{ form.username(class='form-control form-control-md') }}
+                        {% if form.username.errors %}
+                            {% for error in form.username.errors %}
+                                {{ form.username(class='form-control form-control-md is-invalid') }}
+                                <div class="invalid-feedback"> {{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.username(class='form-control form-control-md') }}
+                        {% endif %}                       
                     </div>
                     <div class="form-group">
                         {{ form.email.label(class='form-control-label mt-3') }}
-                        {{ form.email(class='form-control form-control-md') }}
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                {{ form.email(class='form-control form-control-md is-invalid') }}
+                                <div class="invalid-feedback"> {{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.email(class='form-control form-control-md') }}
+                        {% endif %} 
                     </div>
                     <div class="form-group">
                         {{ form.password.label(class='form-control-label mt-3') }}
-                        {{ form.password(class='form-control form-control-md') }}
+                        {% if form.password.errors %}
+                            {% for error in form.password.errors %}
+                                {{ form.password(class='form-control form-control-md is-invalid') }}
+                                <div class="invalid-feedback"> {{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.password(class='form-control form-control-md') }}
+                        {% endif %} 
                     </div>
                     <div class="form-group">
                         {{ form.confirm_password.label(class='form-control-label mt-3') }}
-                        {{ form.confirm_password(class='form-control form-control-md') }}
+                        {% if form.confirm_password.errors %}
+                            {% for error in form.confirm_password.errors %}
+                                {{ form.confirm_password(class='form-control form-control-md is-invalid') }}
+                                <div class="invalid-feedback"> {{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            {{ form.confirm_password(class='form-control form-control-md') }}
+                        {% endif %} 
                     </div>
                 </fieldset>
                 <div class="form-group mt-3 button-register">
