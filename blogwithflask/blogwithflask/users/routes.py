@@ -3,8 +3,8 @@ from PIL import Image
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 import email_validator
 from blogwithflask import bcrypt, db, app
-from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm
-from blogwithflask.users.models import User
+from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm, PostForm
+from blogwithflask.users.models import User, Post
 from flask_login import login_user, current_user, login_required, logout_user
 
 users = Blueprint('users', __name__)
@@ -110,4 +110,16 @@ def account():
 
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account Page', form=form, image_file=image_file)
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, content=form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('users.home'))
+    return render_template('neworedit_post.html', title='New Post', legend='New Post', form=form)
 
