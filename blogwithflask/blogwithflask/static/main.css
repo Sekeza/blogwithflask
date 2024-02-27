@@ -114,3 +114,7 @@ body {
 .button-register {
     margin: 2rem 0;
 }
+
+.bg-nav-header {
+    background-color: #5f788a;
+}
