@@ -2,19 +2,18 @@
 
 {% block content %}
 
-{% for post in posts %}
-<article class="media content-section d-flex">
-    <div class="media-body d-flex">
+{% for post in posts %} 
+    <article class="media content-section d-flex">
+        <img class="rounded-circle account-img" src="{{ url_for('static', filename='images/' + post.author.image_file) }}" >
         <div class="media-body">
-            <a> {{ post.author }} </a>
-            <span> {{ post.date_posted }} </span>
+            <div class="article-metadata">
+                <a href="{{ url_for('user_posts', username=post.author.username) }}" class="mr-2"> {{ post.author.username }} </a>
+                <small class="text-muted smaller-text"> {{ post.date_posted.strftime('%Y-%m-%d') }} </small>
+            </div>
+            <h2><a href="{{ url_for('post', post_id=post.id) }}" class="article-title"> {{ post.title }} </a></h2>
+            <p class="article-content"> {{ post.content }} </p>
         </div>
-        <div class="media-body">
-            <h3> {{ post.title }} </h3>
-            <p> {{ post.content }} </p>
-        </div>
-    </div>
-</article>
+    </article>
 {% endfor %}
 
 {% endblock content%}
