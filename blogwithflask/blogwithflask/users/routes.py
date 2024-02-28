@@ -123,3 +123,7 @@ def new_post():
         return redirect(url_for('users.home'))
     return render_template('neworedit_post.html', title='New Post', legend='New Post', form=form)
 
+@app.route('/post/<int:post_id>')
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html', title='Post', post=post)
