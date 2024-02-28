@@ -4,7 +4,7 @@
         <img class="rounded-circle account-img" src="#" >  
         <div class="media-body">
             <div class="article-metadata">
-                <a href="{{ url_for('user_posts', username=post.author.username) }}" class="mr-2"> {{ post.author.username }} </a>
+                <a href="#" class="mr-2"> {{ post.author.username }} </a>
                 <small class="text-muted smaller-text"> {{ post.date_posted.strftime('%Y-%m-%d') }} </small>
                 {% if post.author == current_user %}
                     <div class="me">
