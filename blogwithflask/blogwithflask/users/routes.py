@@ -65,7 +65,7 @@ def login():
             flash('Welcome! You can log in.', 'success')
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(url_for(next_page)) if next_page else redirect(url_for('users.home'))   
+            return redirect(next_page) if next_page else redirect(url_for('users.home'))   
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
             return redirect(url_for('users.login'))
