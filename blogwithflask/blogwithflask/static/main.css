@@ -17,7 +17,7 @@ html {
 body {
     line-height: 1.7;
     overflow-x: hidden;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
 }
 
 .about {
@@ -93,7 +93,7 @@ body {
 }
 
 
-.form_wrapper {
+.form-wrapper {
     width: 40rem;
     max-width: 100%;
     background: #ffffff;
@@ -117,4 +117,9 @@ body {
 
 .bg-nav-header {
     background-color: #5f788a;
+    padding: 1.8rem 0;
+}
+.brand-name {
+    font-size: 2rem;
+    color: #dddddd;
 }
