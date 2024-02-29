@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="content-section">
+    <div class="form-wrapper">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ image_file }}" >
             <div class="media-body">
@@ -8,9 +8,7 @@
                 <span>  {{ current_user.email }}</span>
             </div>
         </div>
-    </div>
-
-    <form class="mb-2" action="" method="POST" enctype="multipart/form-data" >
+        <form class="mb-2" action="" method="POST" enctype="multipart/form-data" >
             {{ form.hidden_tag() }}
             <legend class="border-bottom mb-2"> Account Information</legend>
             <fieldset class="form-group">
@@ -51,7 +49,8 @@
                 </div>  
                          
             </fieldset>
-            {{ form.submit(class="btn btn-outline-info mt-3") }}
+            {{ form.submit(class="btn btn-outline-info btn-sm mt-3") }}
         </form>
+    </div>
     
 {% endblock content %}
