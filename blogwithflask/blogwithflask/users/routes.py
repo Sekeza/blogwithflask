@@ -111,7 +111,7 @@ def account():
     image_file = url_for('static', filename='images/' + current_user.image_file)
     return render_template('account.html', title='Account Page', form=form, image_file=image_file)
 
-@app.route('/post/new', methods=['GET', 'POST'])
+@users.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
@@ -123,12 +123,12 @@ def new_post():
         return redirect(url_for('users.home'))
     return render_template('neworedit_post.html', title='New Post', legend='New Post', form=form)
 
-@app.route('/post/<int:post_id>')
+@users.route('/post/<int:post_id>')
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     return render_template('post.html', title='Post', post=post)
 
-@app.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
+@users.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
