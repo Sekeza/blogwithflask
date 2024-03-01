@@ -106,7 +106,7 @@ def new_post():
 @users.route('/post/<int:post_id>')
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title='Post', post=post)
+    return render_template('post.html', title=post.title, post=post)
 
 @users.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 @login_required
@@ -120,7 +120,7 @@ def update_post(post_id):
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', post_id=post.id))
+        return redirect(url_for('users.post', post_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
