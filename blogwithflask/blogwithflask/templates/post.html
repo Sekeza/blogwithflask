@@ -8,7 +8,7 @@
                 <small class="text-muted smaller-text"> {{ post.date_posted }} </small>
                 {% if post.author == current_user %}
                     <div class="me">
-                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('users.update_post', post_id=post.id) }}">Update</a>
                         <button type="button" class="btn btn-danger btn-sm m-1" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     </div>
                 {% endif %}
