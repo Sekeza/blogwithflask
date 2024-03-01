@@ -9,10 +9,9 @@ from flask_login import login_user, current_user, login_required, logout_user
 
 users = Blueprint('users', __name__)
 
-
-
 @users.route('/')
 def home():
+    posts = Post.query.all() 
     return render_template('home.html', posts=posts)
 
 @users.route('/about')
