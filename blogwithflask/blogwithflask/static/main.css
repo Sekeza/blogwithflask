@@ -123,3 +123,10 @@ body {
     font-size: 2rem;
     color: #dddddd;
 }
+
+.account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+}
