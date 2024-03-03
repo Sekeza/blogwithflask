@@ -2,10 +2,11 @@ import os, secrets
 from PIL import Image
 from flask import Blueprint, render_template, url_for, redirect, flash, request, abort
 import email_validator
-from blogwithflask import bcrypt, db, app
+from blogwithflask import bcrypt, db, app, mail
 from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm, PostForm, RequestResetForm, ResetPasswordForm
 from blogwithflask.users.models import User, Post
 from flask_login import login_user, current_user, login_required, logout_user
+from flask_mail import Message
 
 users = Blueprint('users', __name__)
 
@@ -145,6 +146,23 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=3)
     return render_template('user_posts.html', posts = posts, user = user)
 
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message(
+            'PASSWORD RESET REQUEST',
+            sender='noreply@demo.com',
+            recipients=[user.email]
+    )
+
+    msg.body = f'''
+To reset your password please click visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+Ignore the message if you have not make the request.
+'''
+
+    mail.send(msg)
 
 @users.route("/reset_password", methods=['GET', 'POST'])
 def reset_request():
