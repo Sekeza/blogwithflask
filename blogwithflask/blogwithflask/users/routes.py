@@ -3,7 +3,7 @@ from PIL import Image
 from flask import Blueprint, render_template, url_for, redirect, flash, request, abort
 import email_validator
 from blogwithflask import bcrypt, db, app
-from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm, PostForm
+from blogwithflask.users.forms import RegisterForm, LoginForm, updateAccountForm, PostForm, RequestResetForm, ResetPasswordForm
 from blogwithflask.users.models import User, Post
 from flask_login import login_user, current_user, login_required, logout_user
 
@@ -145,3 +145,15 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page, per_page=3)
     return render_template('user_posts.html', posts = posts, user = user)
 
+
+@users.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('users.home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password', 'info')
+        return redirect(url_for('users.login'))
+    return render_template('reset_request.html', title = 'Reset Password', form = form)
