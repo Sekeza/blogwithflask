@@ -157,7 +157,7 @@ def send_reset_email(user):
 
     msg.body = f'''
 To reset your password please click visit the following link:
-{url_for('reset_token', token=token, _external=True)}
+{url_for('users.reset_token', token=token, _external=True)}
 
 Ignore the message if you have not make the request.
 '''
@@ -190,7 +190,7 @@ def reset_token(token):
         user.password = hashed_pw
         db.session.commit()
         flash('Your password has been updated! You can now log in', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('users.login'))
     return render_template('reset_token.html', title = 'Reset Password', form = form)
 
 
