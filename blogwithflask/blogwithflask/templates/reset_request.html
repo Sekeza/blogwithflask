@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="form-wrapper">
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <legend class="border-bottom mb-1"> Reset Password </legend>
+            <fieldset class='form-group'>
+                <div class="form-group">
+                    {{form.email.label(class='form-control-label')}}
+                    {% if form.email.errors %}
+                        {{form.email(class='form-control form-control-md is-invalid')}}  
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{form.email(class='form-control form-control-md')}}
+                    {% endif %}
+                </div>
+            </fieldset> 
+            <div class="form-group mt-3">
+                {{ form.submit(class='btn btn-outline-info') }}
+            </div> 
+        </form>
+    </div>
+{% endblock content %}
